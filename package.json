@@ -1,0 +1,23 @@
+{
+  "name": "mo-tools",
+  "version": "0.0.1",
+  "description": "javasript tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/12Tall/mo-tools.git"
+  },
+  "keywords": [
+    "javasrcipt",
+    "tools"
+  ],
+  "author": "12tall",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/12Tall/mo-tools/issues"
+  },
+  "homepage": "https://github.com/12Tall/mo-tools#readme"
+}
