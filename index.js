@@ -103,13 +103,12 @@ const format = {
                 lenFormat = floatFormat.length;
                 lenNum = floatNum.length;
 
-                for (var i = 0; i < lenFormat; i++) {
+                for (i = 0; i < lenFormat; i++) {
                     switch (floatFormat[i]) {
                         case '0':
                             val = floatNum[i] ? val + floatNum[i] : val + '0';
                             break;
                         case '#':
-                            console.log(floatNum[i]);
                             val = floatNum[i] ? val + floatNum[i] : val;
                             break;
                         default:
@@ -117,14 +116,13 @@ const format = {
                             break;
                     }
                 }
-
+                return val;
             }
-            console.log(diff, val)
         });
     }
 }
 
-module.exports = {
+export default {
     getType: getType,
     override: override,
     format: format
