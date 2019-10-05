@@ -45,7 +45,7 @@ function override(obj, fn_name, new_fn) {
 
 const format = {
     Date: function () {
-        override(Date, "toString", function (format) {
+        override(Date, "format", function (format) {
             var date = {
                 "y+": this.getFullYear(),
                 "M+": this.getMonth() + 1,
@@ -68,6 +68,59 @@ const format = {
             }
             return format;
         });
+    },
+    Number: function () {
+        // 参考自：https://zhidao.baidu.com/question/588397625.html
+        override(Number, "format", function (format) {
+            var arrNum = this.toString().split('.'),
+                arrFormat = format.split('.');
+            // 处理整数部分
+            var intNum = arrNum[0],
+                intFormat = arrFormat[0],
+                val = "",
+                lenFormat = intFormat.length,
+                lenNum = intNum.length,
+                diff = lenFormat - lenNum > 0 ? lenFormat - lenNum : 0;
+
+            for (var i = lenFormat - 1; i >= 0; i--) {
+                var index = i - diff;
+                switch (intFormat[i]) {
+                    case '0':
+                        val = index >= 0 ? intNum[index] + val : '0' + val;
+                        break;
+                    case '#':
+                        val = index >= 0 ? intNum[index] + val : val;
+                        break;
+                    default:
+                        val = intFormat[i] + val;
+                        break;
+                }
+            }
+            if (arrFormat[1]) {
+                val = val + '.';
+                var floatNum = arrNum[1] ? arrNum[1] : [],
+                    floatFormat = arrFormat[1];
+                lenFormat = floatFormat.length;
+                lenNum = floatNum.length;
+
+                for (var i = 0; i < lenFormat; i++) {
+                    switch (floatFormat[i]) {
+                        case '0':
+                            val = floatNum[i] ? val + floatNum[i] : val + '0';
+                            break;
+                        case '#':
+                            console.log(floatNum[i]);
+                            val = floatNum[i] ? val + floatNum[i] : val;
+                            break;
+                        default:
+                            val = intFormat[i] + val;
+                            break;
+                    }
+                }
+
+            }
+            console.log(diff, val)
+        });
     }
 }
 
@@ -76,7 +129,4 @@ module.exports = {
     override: override,
     format: format
 }
-
-
-
 
