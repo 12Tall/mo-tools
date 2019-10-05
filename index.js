@@ -96,7 +96,8 @@ const format = {
                         break;
                 }
             }
-            if (arrFormat[1]) {
+            // 应该先判断format 类型的
+            if (format.indexOf('.') > -1) {
                 val = val + '.';
                 var floatNum = arrNum[1] ? arrNum[1] : [],
                     floatFormat = arrFormat[1];
